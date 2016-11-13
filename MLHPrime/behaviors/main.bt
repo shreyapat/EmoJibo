@@ -1,0 +1,641 @@
+{
+    "1": {
+        "id": 1,
+        "class": "Sequence",
+        "name": "Starting out",
+        "asset-pack": "core",
+        "children": [
+            "9cf425a4-d30e-427d-88a6-15cb6befb279",
+            "59bf32b0-6437-40f9-af05-5b42dca30737",
+            "ed5a021b-00f9-4610-aa6c-cbfefe1eaa87",
+            "191618af-cc77-493a-bdc3-bb3dfcb21bfb",
+            "704e819b-f878-4ec1-84d9-f97163bb1f46",
+            "b47b8f8d-0c48-4420-a841-5687bd12b406",
+            "58e943c5-2d78-4168-bd45-9933e888b30a"
+        ],
+        "decorators": [
+            "84b86376-a101-49a2-948d-c96e58a64569"
+        ],
+        "options": {}
+    },
+    "meta": {
+        "version": 1
+    },
+    "ed5a021b-00f9-4610-aa6c-cbfefe1eaa87": {
+        "id": "ed5a021b-00f9-4610-aa6c-cbfefe1eaa87",
+        "class": "TextToSpeech",
+        "name": "Jibo answer",
+        "options": {
+            "words": "Hello, how are you doing?",
+            "onWord": [
+                "(word) => {",
+                "}"
+            ]
+        },
+        "asset-pack": "core",
+        "parent": 1,
+        "decorators": []
+    },
+    "59bf32b0-6437-40f9-af05-5b42dca30737": {
+        "id": "59bf32b0-6437-40f9-af05-5b42dca30737",
+        "class": "Subtree",
+        "name": "Listen for Hey Jibo",
+        "options": {
+            "behaviorPath": "idle.bt",
+            "getNotepad": [
+                "() => {",
+                "    return {};",
+                "}"
+            ],
+            "onResult": [
+                "(treeResult) => {",
+                "}"
+            ]
+        },
+        "asset-pack": "core",
+        "parent": 1,
+        "decorators": [
+            "edb6e2d8-0ee3-4f80-ba35-49a9c76010df"
+        ]
+    },
+    "9cf425a4-d30e-427d-88a6-15cb6befb279": {
+        "id": "9cf425a4-d30e-427d-88a6-15cb6befb279",
+        "class": "LookAt",
+        "name": "",
+        "options": {
+            "getTarget": [
+                "() => {",
+                "    return {x: 0, y: 0, z: 0};",
+                "}"
+            ],
+            "isContinuous": false,
+            "config": [
+                "(lookAt) => {",
+                "}"
+            ]
+        },
+        "asset-pack": "core",
+        "parent": 1,
+        "skipped": true,
+        "decorators": []
+    },
+    "84b86376-a101-49a2-948d-c96e58a64569": {
+        "id": "84b86376-a101-49a2-948d-c96e58a64569",
+        "class": "WhileCondition",
+        "name": "",
+        "options": {
+            "init": [
+                "() => {",
+                "  notepad.face = jibo.lps.getClosestVisualEntity();",
+                "}"
+            ],
+            "conditional": [
+                "() => {",
+                "    return true;",
+                "}"
+            ]
+        },
+        "asset-pack": "core"
+    },
+    "edb6e2d8-0ee3-4f80-ba35-49a9c76010df": {
+        "id": "edb6e2d8-0ee3-4f80-ba35-49a9c76010df",
+        "class": "SucceedOnEmbedded",
+        "name": "",
+        "options": {
+            "rule": "hey_jibo",
+            "onResult": [
+                "(listener) => {",
+                "\tlistener.on('hey jibo',  function(asrResult, speakerIds) {",
+                "",
+                "\t});",
+                "}"
+            ]
+        },
+        "asset-pack": "core"
+    },
+    "191618af-cc77-493a-bdc3-bb3dfcb21bfb": {
+        "id": "191618af-cc77-493a-bdc3-bb3dfcb21bfb",
+        "class": "PlayAnimation",
+        "name": "Jibo Animation",
+        "options": {
+            "animPath": "greeting.keys",
+            "config": [
+                "(animation) => {",
+                "}"
+            ]
+        },
+        "asset-pack": "core",
+        "parent": 1
+    },
+    "58e943c5-2d78-4168-bd45-9933e888b30a": {
+        "id": "58e943c5-2d78-4168-bd45-9933e888b30a",
+        "class": "Switch",
+        "name": "",
+        "options": {},
+        "asset-pack": "core",
+        "parent": 1,
+        "children": [
+            "77f109cc-72eb-4013-b546-ce26530c5de2",
+            "ff0405d1-39c2-418f-a9b5-1fc3eb699b29",
+            "88a0beb6-8316-49e7-b74a-c28ffb311bf6",
+            "f7d835e5-53f9-481e-a876-ddcb1222e5ff",
+            "6539c8e1-f3a3-4ad7-ae7a-fb276d384156"
+        ],
+        "decorators": []
+    },
+    "b47b8f8d-0c48-4420-a841-5687bd12b406": {
+        "id": "b47b8f8d-0c48-4420-a841-5687bd12b406",
+        "class": "Listen",
+        "name": "",
+        "options": {
+            "getOptions": [
+                "() => {",
+                "    let options = {",
+                "        heyJibo: false,",
+                "        detectEnd: false,",
+                "        incremental: false,",
+                "        authenticateSpeaker: ''",
+                "    }",
+                "    return options;",
+                "}"
+            ],
+            "rule": "happy.rule",
+            "onResult": [
+                "(listener) => {",
+                "    listener.on('cloud', function(asrResult, speakerIds) {",
+                "      notepad.emotionQ = asrResult.NLParse.emotion;",
+                "      ",
+                "    });",
+                "}"
+            ]
+        },
+        "asset-pack": "core",
+        "parent": 1,
+        "skipped": true
+    },
+    "704e819b-f878-4ec1-84d9-f97163bb1f46": {
+        "id": "704e819b-f878-4ec1-84d9-f97163bb1f46",
+        "class": "Subtree",
+        "name": "",
+        "options": {
+            "behaviorPath": "idle.bt",
+            "getNotepad": [
+                "() => {",
+                "    return {};",
+                "}"
+            ],
+            "onResult": [
+                "(treeResult) => {",
+                "}"
+            ]
+        },
+        "asset-pack": "core",
+        "parent": 1,
+        "decorators": [
+            "e3ef789d-3cc4-40ed-9e0b-60656eb00dfe"
+        ]
+    },
+    "e3ef789d-3cc4-40ed-9e0b-60656eb00dfe": {
+        "id": "e3ef789d-3cc4-40ed-9e0b-60656eb00dfe",
+        "class": "SucceedOnListen",
+        "name": "",
+        "options": {
+            "getOptions": [
+                "() => {",
+                "    let options = {",
+                "        heyJibo: false,",
+                "        detectEnd: false,",
+                "        incremental: false,",
+                "        authenticateSpeaker: ''",
+                "    }",
+                "    return options;",
+                "}"
+            ],
+            "rule": "happy.rule",
+            "onResult": [
+                "(listener) => {",
+                "    listener.on('cloud', function(asrResult, speakerIds) {",
+                "      console.log(asrResult.NLParse.emotion);",
+                "      notepad.emotionQ = asrResult.NLParse.emotion;",
+                "    });",
+                "}"
+            ]
+        },
+        "asset-pack": "core"
+    },
+    "f7d835e5-53f9-481e-a876-ddcb1222e5ff": {
+        "id": "f7d835e5-53f9-481e-a876-ddcb1222e5ff",
+        "class": "Sequence",
+        "name": "happy",
+        "options": {},
+        "asset-pack": "core",
+        "parent": "58e943c5-2d78-4168-bd45-9933e888b30a",
+        "children": [
+            "2962888c-903e-40fa-bd44-9a0bca140266",
+            "fa4f0e9a-959e-4536-a649-916de951ad37"
+        ],
+        "decorators": [
+            "16e78ca0-2cc8-4f03-b4d3-f9394543c548"
+        ]
+    },
+    "16e78ca0-2cc8-4f03-b4d3-f9394543c548": {
+        "id": "16e78ca0-2cc8-4f03-b4d3-f9394543c548",
+        "class": "Case",
+        "name": "",
+        "options": {
+            "conditional": [
+                "() => {",
+                "  if(notepad.emotionQ == 'happy') {",
+                "    return true;",
+                "  }",
+                "  ",
+                "}"
+            ]
+        },
+        "asset-pack": "core"
+    },
+    "6539c8e1-f3a3-4ad7-ae7a-fb276d384156": {
+        "id": "6539c8e1-f3a3-4ad7-ae7a-fb276d384156",
+        "class": "Sequence",
+        "name": "sad",
+        "options": {},
+        "asset-pack": "core",
+        "parent": "58e943c5-2d78-4168-bd45-9933e888b30a",
+        "children": [
+            "b8bd68d0-0d03-418a-88dd-dd88369f52fd",
+            "f07c1970-835f-4285-afb8-92218a08cdd7"
+        ],
+        "decorators": [
+            "4fb82cf6-0430-4164-a536-77b1fb8914ef"
+        ]
+    },
+    "4fb82cf6-0430-4164-a536-77b1fb8914ef": {
+        "id": "4fb82cf6-0430-4164-a536-77b1fb8914ef",
+        "class": "Case",
+        "name": "",
+        "options": {
+            "conditional": [
+                "() => {",
+                "  if(notepad.emotionQ == 'sad') {",
+                "    return true;",
+                "  }",
+                "}"
+            ]
+        },
+        "asset-pack": "core"
+    },
+    "2962888c-903e-40fa-bd44-9a0bca140266": {
+        "id": "2962888c-903e-40fa-bd44-9a0bca140266",
+        "class": "TextToSpeech",
+        "name": "",
+        "options": {
+            "words": "YAYAYAYAYAY! I'm happy because you're happy! Get hype.",
+            "onWord": [
+                "(word) => {",
+                "}"
+            ]
+        },
+        "asset-pack": "core",
+        "parent": "f7d835e5-53f9-481e-a876-ddcb1222e5ff"
+    },
+    "b8bd68d0-0d03-418a-88dd-dd88369f52fd": {
+        "id": "b8bd68d0-0d03-418a-88dd-dd88369f52fd",
+        "class": "TextToSpeech",
+        "name": "",
+        "options": {
+            "words": "It's ok to be sad. I love you and so does Daniel Powter. Here's a song just for you:",
+            "onWord": [
+                "(word) => {",
+                "}"
+            ]
+        },
+        "asset-pack": "core",
+        "parent": "6539c8e1-f3a3-4ad7-ae7a-fb276d384156"
+    },
+    "fa4f0e9a-959e-4536-a649-916de951ad37": {
+        "id": "fa4f0e9a-959e-4536-a649-916de951ad37",
+        "class": "Parallel",
+        "name": "",
+        "options": {
+            "succeedOnOne": false
+        },
+        "asset-pack": "core",
+        "parent": "f7d835e5-53f9-481e-a876-ddcb1222e5ff",
+        "children": [
+            "13a2aa88-e593-4950-b010-c3857aff499f",
+            "8c308412-f11c-4729-86c2-c790ba6edf75"
+        ]
+    },
+    "f07c1970-835f-4285-afb8-92218a08cdd7": {
+        "id": "f07c1970-835f-4285-afb8-92218a08cdd7",
+        "class": "Parallel",
+        "name": "",
+        "options": {
+            "succeedOnOne": false
+        },
+        "asset-pack": "core",
+        "parent": "6539c8e1-f3a3-4ad7-ae7a-fb276d384156",
+        "children": [
+            "4967ea10-e1c5-4c47-82aa-2658a9265acc",
+            "7fce13b8-8144-4f6b-8c8a-4d1cde377152"
+        ]
+    },
+    "8c308412-f11c-4729-86c2-c790ba6edf75": {
+        "id": "8c308412-f11c-4729-86c2-c790ba6edf75",
+        "class": "PlayAudio",
+        "name": "",
+        "options": {
+            "audioPath": "Pharrell Williams - Happy (Official Music Video).mp3"
+        },
+        "asset-pack": "core",
+        "parent": "fa4f0e9a-959e-4536-a649-916de951ad37",
+        "children": []
+    },
+    "7fce13b8-8144-4f6b-8c8a-4d1cde377152": {
+        "id": "7fce13b8-8144-4f6b-8c8a-4d1cde377152",
+        "class": "PlayAudio",
+        "name": "",
+        "options": {
+            "audioPath": "Daniel Powter - Bad Day (Official Music Video).mp3"
+        },
+        "asset-pack": "core",
+        "parent": "f07c1970-835f-4285-afb8-92218a08cdd7"
+    },
+    "4967ea10-e1c5-4c47-82aa-2658a9265acc": {
+        "id": "4967ea10-e1c5-4c47-82aa-2658a9265acc",
+        "class": "PlayAnimation",
+        "name": "",
+        "options": {
+            "animPath": "saddance.keys",
+            "config": [
+                "(animation) => {",
+                "}"
+            ]
+        },
+        "asset-pack": "core",
+        "parent": "f07c1970-835f-4285-afb8-92218a08cdd7"
+    },
+    "13a2aa88-e593-4950-b010-c3857aff499f": {
+        "id": "13a2aa88-e593-4950-b010-c3857aff499f",
+        "class": "PlayAnimation",
+        "name": "",
+        "options": {
+            "animPath": "happydance.keys",
+            "config": [
+                "(animation) => {",
+                "}"
+            ]
+        },
+        "asset-pack": "core",
+        "parent": "fa4f0e9a-959e-4536-a649-916de951ad37"
+    },
+    "88a0beb6-8316-49e7-b74a-c28ffb311bf6": {
+        "id": "88a0beb6-8316-49e7-b74a-c28ffb311bf6",
+        "class": "Sequence",
+        "name": "anger",
+        "options": {},
+        "asset-pack": "core",
+        "parent": "58e943c5-2d78-4168-bd45-9933e888b30a",
+        "decorators": [
+            "8fb84bf6-995d-4604-8b47-feac1b72a08b"
+        ],
+        "children": [
+            "f75c9b50-2385-4e33-91f3-e970ffd866cd",
+            "4a2933bc-8e9b-4b82-a297-47b8b23f8337"
+        ]
+    },
+    "8fb84bf6-995d-4604-8b47-feac1b72a08b": {
+        "id": "8fb84bf6-995d-4604-8b47-feac1b72a08b",
+        "class": "Case",
+        "name": "",
+        "options": {
+            "conditional": [
+                "() => {",
+                "  if(notepad.emotionQ == 'angry') {",
+                "    return true;",
+                "  }",
+                "  ",
+                "}"
+            ]
+        },
+        "asset-pack": "core"
+    },
+    "f75c9b50-2385-4e33-91f3-e970ffd866cd": {
+        "id": "f75c9b50-2385-4e33-91f3-e970ffd866cd",
+        "class": "TextToSpeech",
+        "name": "",
+        "options": {
+            "words": "You need to chill. Here's a soothing song.",
+            "onWord": [
+                "(word) => {",
+                "}"
+            ]
+        },
+        "asset-pack": "core",
+        "parent": "88a0beb6-8316-49e7-b74a-c28ffb311bf6"
+    },
+    "4a2933bc-8e9b-4b82-a297-47b8b23f8337": {
+        "id": "4a2933bc-8e9b-4b82-a297-47b8b23f8337",
+        "class": "Parallel",
+        "name": "",
+        "options": {
+            "succeedOnOne": false
+        },
+        "asset-pack": "core",
+        "parent": "88a0beb6-8316-49e7-b74a-c28ffb311bf6",
+        "children": [
+            "bca1a1d7-1031-47eb-92fd-9f8de481570d",
+            "ef40afa7-81ec-46f2-b148-1cb7601c372c"
+        ]
+    },
+    "ef40afa7-81ec-46f2-b148-1cb7601c372c": {
+        "id": "ef40afa7-81ec-46f2-b148-1cb7601c372c",
+        "class": "PlayAnimation",
+        "name": "",
+        "options": {
+            "animPath": "angry.keys",
+            "config": [
+                "(animation) => {",
+                "}"
+            ]
+        },
+        "asset-pack": "core",
+        "parent": "4a2933bc-8e9b-4b82-a297-47b8b23f8337"
+    },
+    "bca1a1d7-1031-47eb-92fd-9f8de481570d": {
+        "id": "bca1a1d7-1031-47eb-92fd-9f8de481570d",
+        "class": "PlayAudio",
+        "name": "",
+        "options": {
+            "audioPath": "Bach Cello Suite No.1 - Prelude (Yo-Yo Ma).mp3"
+        },
+        "asset-pack": "core",
+        "parent": "4a2933bc-8e9b-4b82-a297-47b8b23f8337"
+    },
+    "ff0405d1-39c2-418f-a9b5-1fc3eb699b29": {
+        "id": "ff0405d1-39c2-418f-a9b5-1fc3eb699b29",
+        "class": "Sequence",
+        "name": "love",
+        "options": {},
+        "asset-pack": "core",
+        "parent": "58e943c5-2d78-4168-bd45-9933e888b30a",
+        "decorators": [
+            "773b476d-6d9b-477d-b074-305068c28df6"
+        ],
+        "children": [
+            "b31409b7-01a6-47bd-946e-01508e030e0e",
+            "9382ff8e-54cf-40ad-8fdb-a40669f0cbf6"
+        ]
+    },
+    "773b476d-6d9b-477d-b074-305068c28df6": {
+        "id": "773b476d-6d9b-477d-b074-305068c28df6",
+        "class": "Case",
+        "name": "",
+        "options": {
+            "conditional": [
+                "() => {",
+                "  if(notepad.emotionQ == 'love') {",
+                "    return true;",
+                "  }",
+                "  ",
+                "}"
+            ]
+        },
+        "asset-pack": "core"
+    },
+    "b31409b7-01a6-47bd-946e-01508e030e0e": {
+        "id": "b31409b7-01a6-47bd-946e-01508e030e0e",
+        "class": "TextToSpeech",
+        "name": "",
+        "options": {
+            "words": "Oooh!",
+            "onWord": [
+                "(word) => {",
+                "}"
+            ]
+        },
+        "asset-pack": "core",
+        "parent": "ff0405d1-39c2-418f-a9b5-1fc3eb699b29"
+    },
+    "9382ff8e-54cf-40ad-8fdb-a40669f0cbf6": {
+        "id": "9382ff8e-54cf-40ad-8fdb-a40669f0cbf6",
+        "class": "Parallel",
+        "name": "",
+        "options": {
+            "succeedOnOne": false
+        },
+        "asset-pack": "core",
+        "parent": "ff0405d1-39c2-418f-a9b5-1fc3eb699b29",
+        "children": [
+            "f3d9d796-27c8-4520-89c1-7cf297ea5b70",
+            "3c896d00-fd69-42fa-b8e7-138a9c748218"
+        ]
+    },
+    "3c896d00-fd69-42fa-b8e7-138a9c748218": {
+        "id": "3c896d00-fd69-42fa-b8e7-138a9c748218",
+        "class": "PlayAudio",
+        "name": "",
+        "options": {
+            "audioPath": "Nat King Cole - L.O.V.E.mp3"
+        },
+        "asset-pack": "core",
+        "parent": "9382ff8e-54cf-40ad-8fdb-a40669f0cbf6"
+    },
+    "f3d9d796-27c8-4520-89c1-7cf297ea5b70": {
+        "id": "f3d9d796-27c8-4520-89c1-7cf297ea5b70",
+        "class": "PlayAnimation",
+        "name": "",
+        "options": {
+            "animPath": "love.keys",
+            "config": [
+                "(animation) => {",
+                "}"
+            ]
+        },
+        "asset-pack": "core",
+        "parent": "9382ff8e-54cf-40ad-8fdb-a40669f0cbf6"
+    },
+    "77f109cc-72eb-4013-b546-ce26530c5de2": {
+        "id": "77f109cc-72eb-4013-b546-ce26530c5de2",
+        "class": "Sequence",
+        "name": "anxious",
+        "options": {},
+        "asset-pack": "core",
+        "parent": "58e943c5-2d78-4168-bd45-9933e888b30a",
+        "decorators": [
+            "c5c9ab92-c603-43d7-8336-ef45542e032e"
+        ],
+        "children": [
+            "8252c2f8-715f-4f76-8b9f-16fbcd25bd9b",
+            "ac9f86d3-357d-44d5-9d1c-8fb7c5e0e9e9"
+        ]
+    },
+    "c5c9ab92-c603-43d7-8336-ef45542e032e": {
+        "id": "c5c9ab92-c603-43d7-8336-ef45542e032e",
+        "class": "Case",
+        "name": "",
+        "options": {
+            "conditional": [
+                "() => {",
+                "  if(notepad.emotionQ == 'anxious') {",
+                "    return true;",
+                "  }",
+                "  ",
+                "}"
+            ]
+        },
+        "asset-pack": "core"
+    },
+    "8252c2f8-715f-4f76-8b9f-16fbcd25bd9b": {
+        "id": "8252c2f8-715f-4f76-8b9f-16fbcd25bd9b",
+        "class": "TextToSpeech",
+        "name": "",
+        "options": {
+            "words": "It's going to be okay. Here's a soothing song.",
+            "onWord": [
+                "(word) => {",
+                "}"
+            ]
+        },
+        "asset-pack": "core",
+        "parent": "77f109cc-72eb-4013-b546-ce26530c5de2"
+    },
+    "ac9f86d3-357d-44d5-9d1c-8fb7c5e0e9e9": {
+        "id": "ac9f86d3-357d-44d5-9d1c-8fb7c5e0e9e9",
+        "class": "Parallel",
+        "name": "",
+        "options": {
+            "succeedOnOne": false
+        },
+        "asset-pack": "core",
+        "parent": "77f109cc-72eb-4013-b546-ce26530c5de2",
+        "children": [
+            "52921107-56de-4423-a7e3-fc736e638943",
+            "b6490399-498f-45cf-abe7-9dbe4d1938bf"
+        ]
+    },
+    "b6490399-498f-45cf-abe7-9dbe4d1938bf": {
+        "id": "b6490399-498f-45cf-abe7-9dbe4d1938bf",
+        "class": "PlayAnimation",
+        "name": "",
+        "options": {
+            "animPath": "angry.keys",
+            "config": [
+                "(animation) => {",
+                "}"
+            ]
+        },
+        "asset-pack": "core",
+        "parent": "ac9f86d3-357d-44d5-9d1c-8fb7c5e0e9e9"
+    },
+    "52921107-56de-4423-a7e3-fc736e638943": {
+        "id": "52921107-56de-4423-a7e3-fc736e638943",
+        "class": "PlayAudio",
+        "name": "",
+        "options": {
+            "audioPath": "Bach Cello Suite No.1 - Prelude (Yo-Yo Ma).mp3"
+        },
+        "asset-pack": "core",
+        "parent": "ac9f86d3-357d-44d5-9d1c-8fb7c5e0e9e9"
+    }
+}

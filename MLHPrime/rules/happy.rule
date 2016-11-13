@@ -1,0 +1,8 @@
+TopRule =  $*(
+(excited | good | fine | great | excellent | exstatic | jubilant | hella-good| fine | happy) {emotion = 'happy' } |
+(upset | disappointed | depressed | not-good | sad) {emotion = 'sad' }|
+(stressed | overwhelmed | anxious) {emotion = 'anxious' }|
+(loved | in-love | love) {emotion = 'love' }|
+(annoyed | furious | mad | angry) {emotion = 'angry' }
+
+) $*;
